@@ -1,0 +1,17 @@
+---
+
+- name: Config tasks
+  tags:
+    - sudo_config
+    - sudo
+  become: true
+  block:
+    - name: Manage global configuration
+      when: sudo_global_config_options is defined and sudo_global_config_options
+      ansible.builtin.template:
+        src: sudoers.j2
+        dest: "{{ sudo_global_config_file }}" 
+        mode: 0440
+        owner: root
+        group: root
+        validate: 'visudo -cf %s'

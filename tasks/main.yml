@@ -1,0 +1,24 @@
+---
+
+- name: Sudo tasks
+  when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian'
+  tags:
+    - sudo_config
+    - sudo_install
+    - sudo
+  block:
+    - name: Set dependency variables
+      ansible.builtin.include_vars: "{{ item }}"
+      loop:
+        - "common.yml"
+    - name: Installation tasks
+      ansible.builtin.import_tasks: install.yml
+    - name: Configration tasks
+      ansible.builtin.import_tasks: config.yml
+    - name: Dropin configration tasks
+      ansible.builtin.import_tasks: dropin.yml
+  rescue:
+    - name: Print Error
+      ansible.builtin.debug:
+        msg: "Unsupport platform or error occurred due to some reason."
+      failed_when: true

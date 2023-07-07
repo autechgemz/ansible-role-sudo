@@ -1,0 +1,8 @@
+---
+
+sudo_package_name:
+  - sudo
+
+sudo_global_config_file: '/etc/sudoers'
+
+sudo_dropin_config_dir: '/etc/sudoers.d'

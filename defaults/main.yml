@@ -1,0 +1,7 @@
+---
+
+sudo_package_ensure: 'present'
+
+sudo_global_config_options: []
+
+sudo_dropin_config_options: []

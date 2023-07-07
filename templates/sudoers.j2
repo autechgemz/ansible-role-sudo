@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+{% if sudo_global_config_options is defined and sudo_global_config_options %}
+{% for sudoline in sudo_global_config_options %}
+{{ sudoline }}
+{% endfor %}
+{% endif %}
+@includedir /etc/sudoers.d
