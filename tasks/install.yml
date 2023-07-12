@@ -10,14 +10,12 @@
   - name: Install packages
     when: ansible_os_family == 'Debian'
     ansible.builtin.apt:
-      name: ["{{ item }}"]
+      name: "{{ sudo_package_name }}"
       update_cache: true
       state: "{{ sudo_package_ensure }}"
-    with_items: "{{ sudo_package_name }}"
 
   - name: Install packages
     when: ansible_os_family == 'RedHat'
     ansible.builtin.yum:
-      name: ["{{ item }}"]
+      name: "{{ sudo_package_name }}"
       state: "{{ sudo_package_ensure }}"
-    with_items: "{{ sudo_package_name }}"
