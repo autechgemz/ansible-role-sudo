@@ -7,7 +7,7 @@
   become: true
   block:
     - name: Manage global configuration
-      when: sudo_global_config_options is defined and sudo_global_config_options
+      when: sudo_global_config_options is defined and sudo_global_config_options | length > 0
       ansible.builtin.template:
         src: sudoers.j2
         dest: "{{ sudo_global_config_file }}" 
